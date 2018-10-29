@@ -61,6 +61,9 @@ function exc_qry($qry)
 	function resizeImage($fileType,$img_width,$img_height,$resize_width,$resize_height)
 	{
 		$img_layer = imagecreatetruecolor($resize_width, $resize_height);
+		$transparent = imagecolorallocatealpha($img_layer, 0, 0, 0, 127);
+		imagefill($img_layer, 0, 0, $transparent);
+		imagesavealpha($img_layer, true);
 		imagecopyresampled($img_layer, $fileType, 0, 0, 0, 0, $resize_width, $resize_height, $img_width, $img_height);
 		return $img_layer;
 	}
@@ -93,6 +96,7 @@ function exc_qry($qry)
 			case 'image/png':
 			 $resourceType = imagecreatefrompng($file_tmp_nm); 
              $imageLayer = resizeImage($resourceType,$img_width,$img_height,$resize_width,$resize_height);
+
              if(imagepng($imageLayer,$up_desti.$name))
              {
              	$res = "success";

@@ -13,6 +13,9 @@
 							<li>
 								<a href="our_facilities.php">Our Facilites</a>
 							</li>
+							<li>
+								<a href="institutions.php">Institutions</a>
+							</li>
 						</ul>
 					</li>
 					<li>

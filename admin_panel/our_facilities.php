@@ -141,7 +141,7 @@
 													<button type="submit" class="btn btn-success px-4">Edit Facility</button>
 												</td>
 												<td>
-													<button type="submit" name="del_fac" class="btn btn-danger px-4">Delete Facility</button>
+													<button type="submit" name="del_fac" onclick="return confirm('Are you sure You want to delete this facility ? \nYou will not be able to revert this!');" class="btn btn-danger px-4">Delete Facility</button>
 												</td>
 												</form>
 												<td>
@@ -205,7 +205,7 @@
 		$name = $imgNm.time().'.'. $extension;
 		if($result=="success")
 		{
-			$ins_qry = "INSERT INTO sms_facilities SET fac_img =  '$name', fac_title = '$title', fac_desc = '$desc', fac_add_date = now()";
+			$ins_qry = "INSERT INTO sm_facilities SET fac_img =  '$name', fac_title = '$title', fac_desc = '$desc', fac_add_date = now()";
 			$res_qry = mysqli_query($connect,$ins_qry);
 			if($res_qry)
 			{
@@ -213,7 +213,7 @@
 			}
 			else
 			{
-				echo "<script>swal('','Sorry! Facility not added. Try Again','warning');</script>";
+				echo "<script>warningMessage('Sorry! Facility not added. Try Again','our_facilities.php');</script>";
 			}
 		}
 	}
@@ -229,7 +229,7 @@
 		} 
 		else 
 		{
-			echo "<script>swal('','Sorry! Facility not deleted. Try Again','warning');</script>";
+			echo "<script>warningMessage('Sorry! Facility not deleted. Try Again','our_facilities.php');</script>";
 		}
 	}
 
@@ -262,9 +262,7 @@
 			}
 			else
 			{
-				echo $upd_qry;
-				echo mysqli_error($connect);
-				echo "<script>swal('','Sorry! Facility not Updated. Try Again','warning');</script>";
+				echo "<script>warningMessage('Sorry! Facility not Updated. Try Again','our_facilities.php');</script>";
 			}
 	}
 

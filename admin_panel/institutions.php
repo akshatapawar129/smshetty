@@ -4,8 +4,8 @@
 	<meta charset="utf-8">
 	<title>Smshetty</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1">
-
-	<!-- DataTables -->
+	
+		<!-- DataTables -->
 	<link href="assets/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css">
 	<link href="assets/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" type="text/css">
 	<!-- Responsive datatable examples -->
@@ -24,11 +24,8 @@
 	<link href="assets/css/icons.css" rel="stylesheet" type="text/css">
 	<link href="assets/css/metismenu.min.css" rel="stylesheet" type="text/css">
 	<link href="assets/css/style.css" rel="stylesheet" type="text/css">
-
-
 </head>
 <body>
-
 <?php include 'connection.php'; 
 	if (!isValiduser()) 
 	{
@@ -36,8 +33,7 @@
 	}
 	$inst_id = $_POST['inst_id'];
 	list($res_array) = exc_qry("select * from sms_institute where inst_active = 0 order by inst_id desc");
-	//echo "this is id = ".$fac_id;
-	list($edit_fac) = exc_qry("SELECT * FROM sms_institute WHERE inst_id = ".$inst_id);
+	list($edit_inst) = exc_qry("SELECT * FROM sms_institute WHERE inst_id = ".$inst_id);
 ?>	
 	<!-- Top Bar Start -->
 	<?php include 'includes/topbar.php'; ?>
@@ -56,7 +52,7 @@
 							<div class="float-right">
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item">
-										<a href="index.php">Dashboard</a>
+										<a href="javascript:void(0);">Dashboard<?php echo $inst_id; ?></a>
 									</li>
 									<li class="breadcrumb-item">
 										<a href="javascript:void(0);">Home</a>
@@ -68,6 +64,7 @@
 						</div>
 					</div>
 				</div>
+
 				<div class="row">
 					<div class="col-xl-12">
 						<div class="card">
@@ -77,41 +74,36 @@
 								<form method="post" enctype="multipart/form-data">
 									<div class="form-group">
 	        							<label class="col-form-label">Icon</label>
-											<input type="file" name="inst_icon" id="input-file-now" class="dropify" accept="image/jpeg,image/png" data-max-file-size="1M"  
-											<?php if(strlen($inst_id)>0){
-									 		echo 'data-default-file="../images/slider/'.$edit_img[0]['sms_slider_img'].'"'; } 
-									 		else{ echo 'required="required "'; } ?> >
+											<input type="file" name="inst_icon" id="input-file-now" class="dropify" accept="image/jpeg,image/png" data-max-file-size="1M"  <?php if(strlen($inst_id)>0){
+											 echo 'data-default-file="../images/icon/'.$edit_inst[0]['inst_icon'].'"'; } else { echo 'required="required"'; } ?> >
 									</div>
 									<div class="form-group">
 	        							<label class="col-form-label">Name</label>
-	        								<input class="form-control" type="text" value="" id="example-text-input" placeholder="Enter Name ..." name="inst_name" required="required" >
+	        								<input class="form-control" type="text" value="<?php echo $edit_inst[0]['inst_name']; ?>" id="example-text-input" placeholder="Enter Name ..." name="inst_name" required="required" >
 	        						</div>
 	        						<div class="form-group">
 	        							<label class="col-form-label">Description</label>
-	        								<input class="form-control" type="text" value="" id="example-text-input" placeholder="Enter Description ..." name="inst_desc" required="required" >
+	        								<input class="form-control" type="text" value="<?php echo $edit_inst[0]['inst_desc']; ?>" id="example-text-input" placeholder="Enter Description ..." name="inst_desc" required="required" >
 	        						</div>
 
 									<div class="form-group">
 										<label class="col-form-label">Background Color</label>
 										<div id="cp2" class="input-group colorpicker-component">
-											<input type="text" name="inst_color" value="#000000" class="form-control"> 
+											<input type="text" name="inst_color" value="<?php echo $edit_inst[0]['inst_color']; ?>"  class="form-control"> 
 											<span class="input-group-addon">
 												<i></i>
 											</span>
 										</div>
 									</div>
 									<div class="form-group mb-4">
-									<?php if (strlen($inst_id)>0) { ?>
+										<?php if (strlen($inst_id)>0) { ?>
 										<input type="hidden" name="inst_id" value="<?php echo $inst_id; ?>">
-										<button type="submit" name="edit_img" class="btn btn-primary px-5">Edit Image</button>
-										<button class="btn btn-danger px-5" name="redirect" onclick="window.location = 'slider.php';" >Cancel</button>
+										<button type="submit" name="edit_inst"  class="btn btn-primary px-5">Edit Image</button>
+										<button class="btn btn-danger px-5" name="redirect" onclick="window.location = 'institutions.php';" >Cancel</button>
 
 									<?php } else { ?>
-
-										<button type="submit" name="add_inst" class="btn btn-primary px-4">Add Facilities</button>
-
-									<?php } ?>
-									
+										<button type="submit" name="add_inst" class="btn btn-primary px-4">Add Institution</button>
+									<?php  } ?>
 									</div >
 								</form>
 							</div>
@@ -154,13 +146,9 @@
 													<?php echo $res_array[$i]['inst_color']; ?>
 												</td>
 												<form method="post">
-													<input type="text" name="inst_id" value="<?php echo $res_array[$i]['inst_id']; ?>">
-												<td>
-													<button type="submit"  class="btn btn-success px-4">Edit Insitute</button>
-												</td>
-												<td>
-													<button type="submit" name="del_inst" class="btn btn-danger px-4">Delete Institute</button>
-												</td>
+													<input type="hidden" name="inst_id" value="<?php echo $res_array[$i]['inst_id'] ;?>">
+												<td><button  type="submit" class="btn btn-success">Edit institute</button></td>
+												<td><button name="del_inst"  type="submit" class="btn btn-danger" onclick="return confirm('Are you sure You want to delete institute detail ? \nYou will not be able to revert this!');">Delete institute</button></td>
 												</form>
 												<td>
 													<span class="text-success"><i class = "fa fa-check"></i></span>
@@ -175,6 +163,7 @@
 					</div><!-- end col -->
 				</div>
 
+
 			</div>
 			<!-- footer -->
 			<?php include 'includes/footer.php'; ?>
@@ -182,6 +171,8 @@
 				<!-- end page content -->
 	</div>
 			<!-- end page-wrapper -->
+			<!-- jQuery  -->
+			
 <!-- jQuery  -->
 <script src="assets/js/jquery.min.js"></script>
 <script src="assets/js/bootstrap.bundle.min.js"></script>
@@ -203,8 +194,6 @@
 <script src="assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 <script src="assets/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
 <script src="assets/pages/jquery.form-advanced.init.js"></script><!-- App js -->
-<!-- App js -->
-<script src="assets/js/app.js"></script>
 <!-- Required datatable js -->
 <script src="assets/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="assets/plugins/datatables/dataTables.bootstrap4.min.js"></script>
@@ -213,17 +202,18 @@
 <script src="assets/plugins/datatables/responsive.bootstrap4.min.js"></script>
 <!-- Datatable init js -->
 <script src="assets/pages/jquery.table-datatable.js"></script>
+<!-- App js -->
+<script src="assets/js/app.js"></script>
 
 </body>
 <?php 
 
-	
-	//add institute
-	if(isset($_POST['add_inst']))
-	{	
-		$name = mysqli_real_escape_string($connect,$_POST['inst_name']);
-		$desc = mysqli_real_escape_string($connect,$_POST['inst_desc']);
+//add institute details
+if(isset($_POST['add_inst']))
+	{
 		$icon = $_FILES['inst_icon'];
+		$name = $_POST['inst_name'];
+		$desc = $_POST['inst_desc'];
 		$color = $_POST['inst_color'];
 		$up_des = "../images/icon/";
 		$resize_width = 80; //in pixel
@@ -234,64 +224,76 @@
 		$icon_name = $imgNm.time().'.'. $extension;
 		if($result=="success")
 		{
-			$ins_qry = "INSERT INTO sms_institute SET inst_icon =  '$icon_name', inst_name = '$name', inst_desc = '$desc', inst_color ='$color' , inst_add_date = now()";
+			$ins_qry = "INSERT INTO sms_institute SET inst_name =  '$name',inst_desc = 'desc',inst_icon = '$icon_name', inst_color = '$color', inst_add_date = now()";
 			$res_qry = mysqli_query($connect,$ins_qry);
 			if($res_qry)
 			{
-				echo "<script>successMessage('Institute Added Successfully','institutions.php');</script>";
+				echo "<script>successMessage('Institude Added Successfully','institutions.php');</script>";
 			}
 			else
 			{
-				echo "<script>swal('','Sorry! Institute not added. Try Again','warning');</script>";
+				echo "<script>warningMessage('Sorry! Institude not added. Try Again','institutions.php');</script>";
 			}
 		}
 	}
 
-	//delete institute
-	if(isset($_POST['del_inst']))
+if(isset($_POST['redirect']))
 	{
-		$inst_id = $_POST['inst_id'];
-		echo "id ". $inst_id;		
-		$del_qry = "UPDATE sms_institute SET inst_active = 1 WHERE inst_id = $inst_id";
-		$res_qry = mysqli_query($connect,$del_qry);
-		if ($res_qry) 
-		{
-			echo "<script>successMessage('Institution Deleted Successfully','institutions.php');</script>";
-		} 
-		else 
-		{	
-			echo $del_qry;
-		//echo mysqli_error($connect);
-			echo "<script>swal('','Sorry! Institution not deleted. Try Again','warning');</script>";
-		}
 		
+		redirect('institutions.php');
 	}
 
-	if (isset($_POST['edit_fac'])) {
-		$slid_id = $_POST['slid_id'];
-		echo $slid_id;
-		$img = $_FILES['slider_image'];
-		$up_des = "../images/slider/";
-		$resize_width = 750; //in pixel
-		$resize_height = 350; // in pixel
-		$imgNm = "slider_";
-		$result = upload_image($img,$up_des,$resize_width,$resize_height,$imgNm);
-		$extension = pathinfo($img['name'],PATHINFO_EXTENSION);
-		$name = $imgNm.time().'.'. $extension;
-		if($result=="success")
+	//add institute details
+	if(isset($_POST['edit_inst']))
 		{
-			$upd_qry = "UPDATE sms_slider_home SET sms_slider_img =  '$name', sms_img_edit_date = now() WHERE sms_slider_id = $slid_id";
-			echo $upd_qry;
+			$edit_id = $_POST['inst_id'];
+		$icon = $_FILES['inst_icon'];
+		$name = $_POST['inst_name'];
+		$desc = $_POST['inst_desc'];
+		$color = $_POST['inst_color'];
+		$ic_qry = "";
+
+		if (strlen($icon['name'])>0) //if file is uploaded
+			{
+				$up_des = "../images/icon/";
+				$resize_width = 80; //in pixel
+				$resize_height = 80; // in pixel
+				$imgNm = "institute_";
+				$result = upload_image($icon,$up_des,$resize_width,$resize_height,$imgNm);
+				$extension = pathinfo($icon['name'],PATHINFO_EXTENSION);
+				$icon_name = $imgNm.time().'.'. $extension;
+				if($result=="success")
+				{
+					$ic_qry = ",inst_icon = '$icon_name'";
+				}
+			}
+		
+			$upd_qry = "UPDATE sms_institute SET inst_name =  '$name',inst_desc = '$desc', inst_color = '$color', inst_edit_date = now() $ic_qry WHERE inst_id = $inst_id";
 			$res_qry = mysqli_query($connect,$upd_qry);
 			if($res_qry)
 			{
-				echo "<script>successMessage('Image Updated Successfully','slider.php');</script>";
+				echo "<script>successMessage('Institude Updated Successfully','institutions.php');</script>";
 			}
 			else
 			{
-				echo "<script>swal('','Sorry! Image not updated. Try Again','warning');</script>";
+				echo "<script>warningMessage('Sorry! Institude not updated. Try Again','institutions.php');</script>";
 			}
 		}
-	} 
+
+	//delete institute details
+	if (isset($_POST['del_inst'])) 
+	{
+		$del_id = $_POST['inst_id'];
+		$del_qry = "UPDATE sms_institute SET inst_active = 1 WHERE inst_id = $del_id";
+		$res_qry = mysqli_query($connect,$del_qry);
+		if ($res_qry) 
+		{
+			echo "<script>successMessage('Institute details Deleted Successfully','institutions.php');</script>";
+		}
+		else
+		{
+			echo "<script>warningMessage('Sorry! Unable to Delete Institute Detail. Try Again','noticeboard.php');</script>";
+		}	
+	}
 ?>
 </html>

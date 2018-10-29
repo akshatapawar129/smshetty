@@ -4,9 +4,6 @@
 	<meta charset="utf-8">
 	<title>Smshetty</title>
 	<meta name="viewport" content="width=device-width,initial-scale=1">
-
-	
-
 	<!-- Dropzone css -->
 	<link href="assets/plugins/dropzone/dist/dropzone.css" rel="stylesheet" type="text/css">
 	<link href="assets/plugins/dropify/css/dropify.min.css" rel="stylesheet">
@@ -102,7 +99,7 @@
 									<div class="text-sm-right">
 										<form method="post">
 											<input type="hidden" name="sli_id" value="<?php echo $res_array[$i]['sms_slider_id'] ?>">
-											<button type="submit" name="del-img"><i class="fa fa-trash"></i></button>
+											<button type="submit" name="del-img" onclick="return confirm('Are you sure You want to delete this image ? \nYou will not be able to revert this!');"><i class="fa fa-trash"></i></button>
 											<button><i class="fa fa-pencil"></i></button>
 										</form>
 									</div>
@@ -165,7 +162,7 @@
 			}
 			else
 			{
-				echo "<script>swal('','Sorry! Image not added. Try Again','warning');</script>";
+				echo "<script>warningMessage('Sorry! Image not added. Try Again','slider.php');</script>";
 			}
 		}
 	}
@@ -182,7 +179,7 @@
 		} 
 		else 
 		{
-			echo "<script>swal('','Sorry! Image not deleted. Try Again','warning');</script>";
+			echo "<script>warningMessage('Sorry! Image not deleted. Try Again','slider.php');</script>";
 		}
 		
 	}
@@ -190,7 +187,6 @@
 	//edit slider img
 	if (isset($_POST['edit_img'])) {
 		$slid_id = $_POST['slid_id'];
-		echo $slid_id;
 		$img = $_FILES['slider_image'];
 		$up_des = "../images/slider/";
 		$resize_width = 750; //in pixel
@@ -210,7 +206,7 @@
 			}
 			else
 			{
-				echo "<script>swal('','Sorry! Image not updated. Try Again','warning');</script>";
+				echo "<script>warningMessage('Sorry! Image not updated. Try Again','slider.php');</script>";
 			}
 		}
 	} 

@@ -157,7 +157,7 @@
 													<button type="submit" class="btn btn-success px-4">Edit Notice</button>
 												</td>
 												<td>
-													<button type="submit" name="del_notice" class="btn btn-danger px-4">Delete Notice</button>
+													<button type="submit" name="del_notice" class="btn btn-danger px-4" onclick="return confirm('Are you sure You want to delete this notice ? \nYou will not be able to revert this!');">Delete Notice</button>
 												</td>
 												</form>
 												<td>
@@ -253,7 +253,7 @@
 			}
 			else
 			{
-				echo "<script>swal('','Sorry! Unable to Add notice . Try Again','warning');</script>";
+				echo "<script>warningMessage('Sorry! Unable to Add notice . Try Again','noticeboard.php');</script>";
 			}
 		}
 		else
@@ -275,7 +275,7 @@
 		}
 		else
 		{
-			echo "<script>swal('','Sorry! Unable to Delete notice . Try Again','warning');</script>";
+			echo "<script>warningMessage('Sorry! Unable to Delete notice . Try Again','noticeboard.php');</script>";
 		}	
 	}
 
@@ -328,7 +328,7 @@
 			}
 			else
 			{
-				echo "<script>swal('','Sorry! Unable to Update notice . Try Again','warning');</script>";
+				echo "<script>warningMessage('Sorry! Unable to Update notice . Try Again','noticeboard.php');</script>";
 			}
 		}
 		else
