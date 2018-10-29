@@ -79,17 +79,17 @@
 									</div>
 									<div class="form-group">
 	        							<label class="col-form-label">Name</label>
-	        								<input class="form-control" type="text" value="<?php echo $edit_inst[0]['inst_name']; ?>" id="example-text-input" placeholder="Enter Name ..." name="inst_name" required="required" >
+	        								<input class="form-control" type="text" value="<?php echo htmlentities($edit_inst[0]['inst_name']); ?>" id="example-text-input" placeholder="Enter Name ..." name="inst_name" required="required" >
 	        						</div>
 	        						<div class="form-group">
 	        							<label class="col-form-label">Description</label>
-	        								<input class="form-control" type="text" value="<?php echo $edit_inst[0]['inst_desc']; ?>" id="example-text-input" placeholder="Enter Description ..." name="inst_desc" required="required" >
+	        								<input class="form-control" type="text" value="<?php echo htmlentities($edit_inst[0]['inst_desc']); ?>" id="example-text-input" placeholder="Enter Description ..." name="inst_desc" required="required" >
 	        						</div>
 
 									<div class="form-group">
 										<label class="col-form-label">Background Color</label>
 										<div id="cp2" class="input-group colorpicker-component">
-											<input type="text" name="inst_color" value="<?php echo $edit_inst[0]['inst_color']; ?>"  class="form-control"> 
+											<input type="text" required="required" name="inst_color" value="<?php echo htmlentities($edit_inst[0]['inst_color']); ?>"  class="form-control"> 
 											<span class="input-group-addon">
 												<i></i>
 											</span>
@@ -98,11 +98,11 @@
 									<div class="form-group mb-4">
 										<?php if (strlen($inst_id)>0) { ?>
 										<input type="hidden" name="inst_id" value="<?php echo $inst_id; ?>">
-										<button type="submit" name="edit_inst"  class="btn btn-primary px-5">Edit Image</button>
+										<button type="submit" name="edit_inst"  class="btn btn-primary px-5">Update Details</button>
 										<button class="btn btn-danger px-5" name="redirect" onclick="window.location = 'institutions.php';" >Cancel</button>
 
 									<?php } else { ?>
-										<button type="submit" name="add_inst" class="btn btn-primary px-4">Add Institution</button>
+										<button type="submit" name="add_inst" class="btn btn-primary px-4">Add Details</button>
 									<?php  } ?>
 									</div >
 								</form>
@@ -212,9 +212,9 @@
 if(isset($_POST['add_inst']))
 	{
 		$icon = $_FILES['inst_icon'];
-		$name = $_POST['inst_name'];
-		$desc = $_POST['inst_desc'];
-		$color = $_POST['inst_color'];
+		$name =  mysqli_real_escape_string($connect,$_POST['inst_name']);
+		$desc =  mysqli_real_escape_string($connect,$_POST['inst_desc']);
+		$color =  mysqli_real_escape_string($connect,$_POST['inst_color']);
 		$up_des = "../images/icon/";
 		$resize_width = 80; //in pixel
 		$resize_height = 80; // in pixel
@@ -224,7 +224,7 @@ if(isset($_POST['add_inst']))
 		$icon_name = $imgNm.time().'.'. $extension;
 		if($result=="success")
 		{
-			$ins_qry = "INSERT INTO sms_institute SET inst_name =  '$name',inst_desc = 'desc',inst_icon = '$icon_name', inst_color = '$color', inst_add_date = now()";
+			$ins_qry = "INSERT INTO sms_institute SET inst_name =  '$name',inst_desc = '$desc',inst_icon = '$icon_name', inst_color = '$color', inst_add_date = now()";
 			$res_qry = mysqli_query($connect,$ins_qry);
 			if($res_qry)
 			{
@@ -248,9 +248,9 @@ if(isset($_POST['redirect']))
 		{
 			$edit_id = $_POST['inst_id'];
 		$icon = $_FILES['inst_icon'];
-		$name = $_POST['inst_name'];
-		$desc = $_POST['inst_desc'];
-		$color = $_POST['inst_color'];
+		$name =  mysqli_real_escape_string($connect,$_POST['inst_name']);
+		$desc =  mysqli_real_escape_string($connect,$_POST['inst_desc']);
+		$color =  mysqli_real_escape_string($connect,$_POST['inst_color']);
 		$ic_qry = "";
 
 		if (strlen($icon['name'])>0) //if file is uploaded

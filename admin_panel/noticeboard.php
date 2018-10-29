@@ -104,8 +104,8 @@
 	        						<div class="form-group mb-4">
 	        							<?php if (strlen($notice_id)>0) 
 	        							{ ?>
-	        								<input type="text" name="noti_id" value="<?php echo $notice_id; ?>">
-	        								<button type="submit" name="edit_notice" class="btn btn-success px-4">Edit Notice</button>
+	        								<input type="hidden" name="noti_id" value="<?php echo $notice_id; ?>">
+	        								<button type="submit" name="edit_notice" class="btn btn-success px-4">Update Notice</button>
 	        								<button name="redirect" onclick="window.location = 'noticeboard.php';" class="btn btn-danger px-4">Cancel</button>
 	        							<?php } 
 	        							else { ?>

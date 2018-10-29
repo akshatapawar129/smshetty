@@ -96,7 +96,7 @@
 									<div class="form-group mb-4">
 									<?php if($faci_id>0){ ?>
 										<input type="hidden" name="faci_id" value="<?php echo $faci_id; ?>">
-	        								<button type="submit" name="edit_fac" class="btn btn-success px-4">Edit Facility</button>
+	        								<button type="submit" name="edit_fac" class="btn btn-success px-4">Update Facility</button>
 	        								<button name="redirect" onclick="window.location = 'our_facilities.php';" class="btn btn-danger px-4">Cancel</button>
 	        						<?php } else { ?>
 										<button type="submit" name="add_fac" class="btn btn-primary px-4">Add Facilities</button>

@@ -76,7 +76,7 @@
 									<div class="form-group mb-4">
 									<?php if (strlen($sli_id)>0) { ?>
 										<input type="hidden" name="slid_id" value="<?php echo $sli_id; ?>">
-										<button type="submit" name="edit_img" class="btn btn-primary px-5">Edit Image</button>
+										<button type="submit" name="edit_img" class="btn btn-primary px-5">Update Image</button>
 										<button class="btn btn-danger px-5" name="redirect" onclick="window.location = 'slider.php';" >Cancel</button>
 
 									<?php } else { ?>

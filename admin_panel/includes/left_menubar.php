@@ -291,5 +291,16 @@
 						</li>
 					</ul>
 				</li>
+				<li>
+					<a href="javascript:void(0);"><i class=" mdi mdi-arrow-down-bold-circle"></i><span>Footer</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+					<ul class="nav-second-level" aria-expanded="false">
+						<li>
+							<a href="quick_links.php">Quick links</a>
+						</li>
+						<li>
+							<a href="contact.php">Contact Info</a>
+						</li>
+					</ul>
+				</li>
 			</ul>
 		</div>
