@@ -109,7 +109,22 @@
 
 if(isset($_POST['edit_con']))
 	{
-		
+		$address = mysqli_real_escape_string($connect,$_POST['con_add']);
+		$phone = mysqli_real_escape_string($connect,$_POST['con_phone']);
+		$email = mysqli_real_escape_string($connect,$_POST['con_email']);
+		$fax = mysqli_real_escape_string($connect,$_POST['con_fax']);
+
+		$upd_qry = "UPDATE sms_one_time SET con_add = '$address',con_phone = '$phone', con_fax = $fax, con_mail = '$email' WHERE change_id = 1";
+		$res_qry = mysqli_query($connect,$upd_qry);
+		if ($res_qry) 
+		{
+			echo "<script>successMessage('Contact Details Updated Successfully','contact.php');</script>";
+		}
+		else
+		{
+			echo "<script>warningMessage('Sorry! Contact Details not Updated. Try Again','contact.php');</script>";
+		}
+
 	}
 
 ?>

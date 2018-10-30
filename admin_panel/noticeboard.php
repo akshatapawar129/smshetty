@@ -161,16 +161,7 @@
 												</td>
 												</form>
 												<td>
-													<?php 
-													if ($i<5) 
-													{
-														echo '<span class="text-success"><i class = "fa fa-check"></i></span>';
-													}
-													else
-													{
-														echo '<span class="text-danger"><i class = "fa fa-times"></i></span>';
-													} ?>
-													
+													<span class="text-success"><i class = "fa fa-check"></i></span>
 												</td>
 											</tr>
 											<?php } ?>

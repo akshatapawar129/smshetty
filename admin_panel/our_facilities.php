@@ -205,7 +205,7 @@
 		$name = $imgNm.time().'.'. $extension;
 		if($result=="success")
 		{
-			$ins_qry = "INSERT INTO sm_facilities SET fac_img =  '$name', fac_title = '$title', fac_desc = '$desc', fac_add_date = now()";
+			$ins_qry = "INSERT INTO sms_facilities SET fac_img =  '$name', fac_title = '$title', fac_desc = '$desc', fac_add_date = now()";
 			$res_qry = mysqli_query($connect,$ins_qry);
 			if($res_qry)
 			{
@@ -213,7 +213,8 @@
 			}
 			else
 			{
-				echo "<script>warningMessage('Sorry! Facility not added. Try Again','our_facilities.php');</script>";
+				echo mysqli_error($connect);
+				//echo "<script>warningMessage('Sorry! Facility not added. Try Again','our_facilities.php');</script>";
 			}
 		}
 	}
