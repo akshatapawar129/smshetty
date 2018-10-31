@@ -33,12 +33,11 @@
 							<div class="float-right">
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item">
-										<a href="javascript:void(0);">Amezia</a>
-									</li>
-									<li class="breadcrumb-item">
 										<a href="javascript:void(0);">Dashboard</a>
 									</li>
-									<li class="breadcrumb-item active">Dashboard</li>
+									<li class="breadcrumb-item">
+										<a href="javascript:void(0);"></a>
+									</li>
 								</ol>
 							</div>
 							<h4 class="page-title">Dashboard</h4>

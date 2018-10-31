@@ -1,22 +1,4 @@
-/*
-SQLyog Ultimate v12.09 (64 bit)
-MySQL - 10.1.36-MariaDB : Database - smshetty_admin
-*********************************************************************
-*/
-
-/*!40101 SET NAMES utf8 */;
-
-/*!40101 SET SQL_MODE=''*/;
-
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`smshetty_admin` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
-
-USE `smshetty_admin`;
-
-/*Table structure for table `sms_facilities` */
+﻿
 
 DROP TABLE IF EXISTS `sms_facilities`;
 
@@ -47,11 +29,11 @@ CREATE TABLE `sms_footer_links` (
   `link_add_date` datetime DEFAULT NULL,
   `link_edit_date` datetime DEFAULT NULL,
   PRIMARY KEY (`link_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `sms_footer_links` */
 
-insert  into `sms_footer_links`(`link_id`,`link_name`,`link_url`,`link_active`,`link_add_date`,`link_edit_date`) values (1,'College Magazine1','http://smshettycollege.edu.in/1',0,'2018-10-29 16:59:21','2018-10-29 17:30:06'),(2,'E-journal','http://smshettycollege.edu.in/',0,'2018-10-29 16:59:51','2018-10-29 17:19:35'),(3,'Academic Calender\'\"126','http://smshettycollege.edu.in/dfsdg\'g',0,'2018-10-29 17:00:12','2018-10-29 17:22:29');
+insert  into `sms_footer_links`(`link_id`,`link_name`,`link_url`,`link_active`,`link_add_date`,`link_edit_date`) values (1,'SiteMap','http://smshettycollege.edu.in/sitemap/',0,'2018-10-29 16:59:21','2018-10-31 10:45:21'),(2,'Services','http://smshettycollege.edu.in/services/',0,'2018-10-29 16:59:51','2018-10-31 10:45:41'),(3,'RTI','http://smshettycollege.edu.in/rti/',0,'2018-10-29 17:00:12','2018-10-31 10:46:11'),(4,'Academic Calender','http://smshettycollege.edu.in/wp-content/uploads/2018/08/2018-19-calendar-for-sms-shetty-1.pdf',0,'2018-10-31 10:46:32',NULL),(5,'College Magazine','http://smshettycollege.edu.in/',0,'2018-10-31 10:46:57',NULL),(6,'E-journal','http://smshettycollege.edu.in/',0,'2018-10-31 10:47:04',NULL);
 
 /*Table structure for table `sms_institute` */
 
@@ -86,11 +68,11 @@ CREATE TABLE `sms_news` (
   `news_add_date` datetime DEFAULT NULL,
   `news_edit_date` datetime DEFAULT NULL,
   PRIMARY KEY (`news_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `sms_news` */
 
-insert  into `sms_news`(`news_id`,`news_title`,`news_desc`,`news_date`,`news_active`,`news_add_date`,`news_edit_date`) values (1,'Nature Club Trip','<p>A visit to the butterfly garden, OWALEKAR WADI, was conducted by the nature club of the college as a part of their Environment Awareness programme, on 14 September, 2014The members of the photography club also joined this programme. The&nbsp; intentionwas to learn about the environment of butterflies and the need to conserve the environment to protect the various species of butterflies.Mr. IsaacKehimkar(BNHS) and Mr. Rajesh Owalekarbriefed the members of the club about the life of a butterfly and its various species.</p>','2017-05-05',0,'2018-10-30 18:39:16',NULL),(2,'Nature Club Trip','<p>A visit to the butterfly garden, OWALEKAR WADI, was conducted by the nature club of the college as a part of their Environment Awareness programme, on 14 September, 2014The members of the photography club also joined this programme. The&nbsp; intentionwas to learn about the environment of butterflies and the need to conserve the environment to protect the various species of butterflies.Mr. IsaacKehimkar(BNHS) and Mr. Rajesh Owalekarbriefed the members of the club about the life of a butterfly and its various species.</p>','2017-05-05',0,'2018-10-30 18:40:07',NULL);
+insert  into `sms_news`(`news_id`,`news_title`,`news_desc`,`news_date`,`news_active`,`news_add_date`,`news_edit_date`) values (1,'Nature Club Trip','<p>A visit to the butterfly garden, OWALEKAR WADI, was conducted by the nature club of the college as a part of their Environment Awareness programme, on 14 September, 2014The members of the photography club also joined this programme. The&nbsp; intentionwas to learn about the environment of butterflies and the need to conserve the environment to protect the various species of butterflies.Mr. IsaacKehimkar(BNHS) and Mr. Rajesh Owalekarbriefed the members of the club about the life of a butterfly and its various species.</p>','2017-05-05',0,'2018-10-30 18:39:16',NULL),(2,'WDC Poster Making Competition','<p>WDC (Womenâ€™sâ€™ Development Cell) organized a poster making competition in the college on the 12th of August, 2014. The purpose of the competition was to provide a platform to the students to express their views on the status of women in todayâ€™s world. Principal Dr. SridharaShetty inaugurated the competition which saw interesting views expressed through art.</p>','2017-05-05',0,'2018-10-30 18:40:07','2018-10-31 10:59:00'),(3,'Nature Club Trip','<p>A visit to the butterfly garden, OWALEKAR WADI, was conducted by the nature club of the college as a part of their Environment Awareness programme, on 14 September, 2014The members of the photography club also joined this programme. The&nbsp; intentionwas to learn about the environment of butterflies and the need to conserve the environment to protect the various species of butterflies.Mr. IsaacKehimkar(BNHS) and Mr. Rajesh Owalekarbriefed the members of the club about the life of a butterfly and its various species.</p>','2017-05-05',0,'2018-10-31 09:24:31','2018-10-31 10:57:44');
 
 /*Table structure for table `sms_notice_board` */
 
@@ -130,7 +112,7 @@ CREATE TABLE `sms_one_time` (
 
 /*Data for the table `sms_one_time` */
 
-insert  into `sms_one_time`(`change_id`,`con_add`,`con_phone`,`con_fax`,`con_mail`,`fb_link`,`tw_link`,`ln_link`,`gp_link`) values (1,'Hiranandani Gardens,1','865239451','523651','akshahtajodfs@jdf.co1',NULL,NULL,NULL,NULL);
+insert  into `sms_one_time`(`change_id`,`con_add`,`con_phone`,`con_fax`,`con_mail`,`fb_link`,`tw_link`,`ln_link`,`gp_link`) values (1,'Hiranandani Gardens, Powai, Mumbai- 400076, Maharashtra','022 61327352/56/63','25706687','college@smshettyinstitute.in',NULL,NULL,NULL,NULL);
 
 /*Table structure for table `sms_slider_home` */
 
@@ -162,13 +144,8 @@ CREATE TABLE `smshetty_login` (
   `adm_active` int(11) NOT NULL DEFAULT '0',
   `adm_sess_id` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`adm_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `smshetty_login` */
 
-insert  into `smshetty_login`(`adm_id`,`adm_us_nm`,`adm_pass`,`adm_email`,`adm_type`,`adm_active`,`adm_sess_id`) values (1,'akshata','9684b5477f9b496c9d6f1bb20dd0c4ea','akshatpawar129@gmail.com',1,0,'ie9bpeeikj61u2fshmvo16o869');
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+insert  into `smshetty_login`(`adm_id`,`adm_us_nm`,`adm_pass`,`adm_email`,`adm_type`,`adm_active`,`adm_sess_id`) values (1,'akshata','9684b5477f9b496c9d6f1bb20dd0c4ea','akshatpawar129@gmail.com',1,0,'400p9uphhguoqvk4bm43m49mj1'),(2,'SMS_AdMINSMShy_Col@786','d698acf1ac697d927d2f8b5f499b1319','akshata.p@trinityglobalservices.org',1,0,'i4r0lbiflq8ics3mmo0g8i6nv6');

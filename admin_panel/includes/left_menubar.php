@@ -16,9 +16,12 @@
 							<li>
 								<a href="institutions.php">Institutions</a>
 							</li>
+							<li>
+								<a href="news.php">News</a>
+							</li>
 						</ul>
 					</li>
-					<li>
+					<!-- <li>
 						<a href="javascript: void(0);"><i class="mdi mdi-email-variant"></i><span>Email</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
 						<ul class="nav-second-level" aria-expanded="false">
 							<li>
@@ -290,7 +293,7 @@
 							<a href="email-templates-billing.html">Billing Email</a>
 						</li>
 					</ul>
-				</li>
+				</li> -->
 				<li>
 					<a href="javascript:void(0);"><i class=" mdi mdi-arrow-down-bold-circle"></i><span>Footer</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
 					<ul class="nav-second-level" aria-expanded="false">

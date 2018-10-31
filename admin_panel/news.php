@@ -26,6 +26,10 @@
 	{
 		redirect("login.php");
 	}
+	list($res_array) = exc_qry("select * from sms_news where news_active = 0 order by news_id desc");
+	$news_id = $_POST['news_id'];
+	list($edit_news) = exc_qry("SELECT * FROM sms_news WHERE news_id = ".$news_id);
+	//echo count($edit_news);
 ?>	
 	<!-- Top Bar Start -->
 	<?php include 'includes/topbar.php'; ?>
@@ -65,24 +69,24 @@
 								<form method="post">
 									<div class="form-group">
 	        							<label class="col-form-label">News Title</label>
-	        								<input class="form-control" type="text" value="" id="example-text-input" placeholder="Enter Title ..." name="news_title" required="required" >
+	        								<input class="form-control" type="text" value="<?php echo htmlentities($edit_news[0]['news_title']); ?>" id="example-text-input" placeholder="Enter Title ..." name="news_title" required="required" >
 	        						</div>
 									<div class="form-group">
 	        							<label class="col-form-label">News Date</label>
-	        								<input class="form-control" type="date" value="" id="example-text-input"  name="news_date" required="required" >
+	        								<input class="form-control" type="date" value="<?php echo $edit_news[0]['news_date']; ?>" id="example-text-input"  name="news_date" required="required" >
 	        						</div>
 	        						<div class="form-group">
 	        							<label class="col-form-label">News Description</label>
 										  	<textarea name="news_desc" id="editor" placeholder=" News Description....">
-									          
+									          <?php echo htmlentities($edit_news[0]['news_desc']); ?>
 									        </textarea>
 
 	        						</div>
 
 									<div class="form-group mb-4">
-										<?php if (strlen($inst_id)>0) { ?>
+										<?php if (strlen($news_id)>0) { ?>
 										<input type="hidden" name="news_id" value="<?php echo $news_id; ?>">
-										<button type="submit" name="edit_inst"  class="btn btn-primary px-5">Update Details</button>
+										<button type="submit" name="edit_news"  class="btn btn-primary px-5">Update Details</button>
 										<button class="btn btn-danger px-5" name="redirect" onclick="window.location = 'news.php';" >Cancel</button>
 
 									<?php } else { ?>
@@ -93,6 +97,56 @@
 							</div>
 						</div>
 					</div>
+				</div>
+
+
+				<div class="row">
+					<div class="col-md-12">
+						<div class="card">
+							<div class="card-body">
+								<h5 class="mt-0">News</h5>
+								<div class="table-responsive">
+									<table id="datatable" class="table table-bordered">
+										<thead>
+											<tr>
+												<th>Sr.No</th>
+												<th>Title</th>
+												<th>Description</th>
+												<th>Date</th>
+												<th colspan="2" class="text-center">Action</th>
+												<th>Display</th>
+											</tr>
+										</thead>
+										<tbody>
+											<?php for ($i=0; $i < count($res_array) ; $i++) {
+											 ?>
+											<tr>
+												<td><?php echo $i+1; ?></td>
+												<td>
+													<?php echo $res_array[$i]['news_title']; ?>
+												</td>
+												<td>
+													<?php echo $res_array[$i]['news_desc']; ?>
+												</td>
+												<td>
+													<?php echo date("Y-m-d",strtotime($res_array[$i]['news_date'])); ?>
+												</td>
+												<form method="post">
+													<input type="hidden" name="news_id" value="<?php echo $res_array[$i]['news_id'] ;?>">
+												<td><button  type="submit" class="btn btn-success">Edit news</button></td>
+												<td><button name="del_news"  type="submit" class="btn btn-danger" onclick="return confirm('Are you sure You want to delete this News ? \nYou will not be able to revert this!');">Delete News</button></td>
+												</form>
+												<td>
+													<span class="text-success"><i class = "fa fa-check"></i></span>
+												</td>
+											</tr>
+											<?php } ?>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div><!-- end col -->
 				</div>
 
 
@@ -139,11 +193,12 @@
 if(isset($_POST['add_news']))
 	{
 		$title =  mysqli_real_escape_string($connect,$_POST['news_title']);
-		$desc =  mysqli_real_escape_string($connect,$_POST['news_desc']);
+		$desc =  trim(mysqli_real_escape_string($connect,$_POST['news_desc']));
 		$n_date = mysqli_real_escape_string($connect,$_POST['news_date']);
 
-		$ins_qry = "INSERT INTO sms_news SET news_title =  '$title', news_desc = '$desc', news_date = '$n_date', news_add_date = now()";
-		$res_qry = mysqli_query($connect,$ins_qry);
+		if (strlen($desc) > 0 && $desc != "<p>&nbsp;</p>") {
+			$ins_qry = "INSERT INTO sms_news SET news_title =  '$title', news_desc = '$desc', news_date = '$n_date', news_add_date = now()";
+			$res_qry = mysqli_query($connect,$ins_qry);
 			if($res_qry)
 			{
 				echo "<script>successMessage('News Added Successfully','news.php');</script>";
@@ -152,8 +207,59 @@ if(isset($_POST['add_news']))
 			{
 				echo "<script>warningMessage('Sorry! News not added. Try Again','news.php');</script>";
 			}
+		}
+		else
+		{
+			echo "<script>swal('','Please Fill News Description','warning');</script>";
+		}
+		
 	}
 
+	//redirect
+	if(isset($_POST['redirect']))
+	{
+		redirect('news.php');
+	}
+
+	//del news
+	if(isset($_POST['del_news']))
+	{
+		$del_id = $_POST['news_id'];
+		$del_qry = "UPDATE sms_news SET news_active = 1 WHERE news_id = $del_id";
+			$res_qry = mysqli_query($connect,$del_qry);
+			if($res_qry)
+			{
+				echo "<script>successMessage('News Deleted Successfully','news.php');</script>";
+			}
+			else
+			{
+				echo "<script>warningMessage('Sorry! news not Deleted. Try Again','news.php');</script>";
+			}
+	}
+
+	if (isset($_POST['edit_news'])) {
+		$edit_id = $_POST['news_id'];
+		$title =  mysqli_real_escape_string($connect,$_POST['news_title']);
+		$desc =  trim(mysqli_real_escape_string($connect,$_POST['news_desc']));
+		$n_date = mysqli_real_escape_string($connect,$_POST['news_date']);
+
+		if (strlen($desc) > 0 && $desc != "<p>&nbsp;</p>") {
+			$upd_qry = "UPDATE sms_news SET news_title =  '$title', news_desc = '$desc', news_date = '$n_date', news_edit_date = now() WHERE news_id = $edit_id";
+			$res_qry = mysqli_query($connect,$upd_qry);
+			if($res_qry)
+			{
+				echo "<script>successMessage('News Updated Successfully','news.php');</script>";
+			}
+			else
+			{
+				echo "<script>warningMessage('Sorry! News not Updated. Try Again','news.php');</script>";
+			}
+		}
+		else
+		{
+			echo "<script>swal('','Please Fill News Description','warning');</script>";
+		}
+	}
 ?>
 </html>
 

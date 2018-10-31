@@ -24,15 +24,12 @@
                             </div>
                             <div class="widget-body">
                                 <div class="footer-useful-link">
+                                     
                                     <ul>
-                                        <li><a href="#">E-journal</a></li>
-                                        <li><a href="#">College Magazine</a></li>
-                                        <li><a href="#">Academic Calendar</a></li>
-                                        <li><a href="#">RTI</a></li>
-                                        <li><a href="#">UGC Portals</a></li>
-                                        <li><a href="#">Services</a></li>
-                                        <li><a href="#">Sitemap</a></li>
-                                        
+                                        <?php list($quick_links) = exc_qry("SELECT * FROM `sms_footer_links` WHERE link_active = 0 ORDER BY link_id desc");
+                                    for ($i=0; $i < count($quick_links) ; $i++) {  ?>
+                                        <li><a href="<?php echo $quick_links[$i]['link_url']; ?>"><?php echo $quick_links[$i]['link_name']; ?></a></li>
+                                        <?php } ?>
                                     </ul>
                                 </div>
                             </div>
@@ -66,10 +63,10 @@
                                 <div class="footer-useful-link">
                                <p><strong>Bunts Sangha’s S.M.Shetty College of Science, Commerce & Management Studies</strong></p>
                                     <ul>
-                                        <li><span>Address:</span> Hiranandani Gardens, Powai, Mumbai- 400076, Maharashtra</li>
-                                        <li><span>email:</span> <a href="mailto:college@smshettyinstitute.in">college@smshettyinstitute.in</a></li>
-                                        <li><span>Phone:</span> 022 61327352/56/63</li>
-                                        <li><span>Fax:</span> 25706687</li>
+                                        <li><span>Address:</span> <?php echo $one_time[0]['con_add']; ?></li>
+                                        <li><span>email:</span> <a href="mailto:<?php echo $one_time[0]['con_mail']; ?>"><?php echo $one_time[0]['con_mail']; ?></a></li>
+                                        <li><span>Phone:</span> <?php echo $one_time[0]['con_phone']; ?></li>
+                                        <li><span>Fax:</span> <?php echo $one_time[0]['con_fax']; ?></li>
                                         <li><span>Website:</span><a href="http://smshettycollege.edu.in/">www.smshettycollege.edu.in</a> </li>
                                     </ul>
                                 </div>

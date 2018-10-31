@@ -1,4 +1,6 @@
-<?php include 'db.php'; ?>
+<?php include 'db.php';
+list($one_time) = exc_qry("SELECT * FROM `sms_one_time` WHERE change_id =1 ");
+ ?>
 <header class="header-pos">
         <div class="header-top blue-bg">
             <div class="container-fluid">

@@ -206,31 +206,23 @@
     </div>
 
     <div class="upcoming-news">
+      <?php 
+          list($news) = exc_qry("SELECT * FROM `sms_news` WHERE news_active = 0 ORDER BY news_id DESC");
+                      for ($i=0; $i < 2; $i++) {  ?>
+      <div class="newsone">
+        <div class="fusion-date-box">
+        <span class="news-date"><?php echo date('d', strtotime($news[$i]['news_date'])); ?></span>
+          <span class="news-month-year"><?php echo date('d-m-Y', strtotime($news[$i]['news_date'])); ?></span> </div>
+         
+          
+      	   <div class="recent-posts-content">
+      		<h4 class="entry-title"><a href="#"><?php echo $news[$i]['news_title']; ?></a></h4>
+          <p><?php echo substr($news[$i]['news_desc'],0,80)."..."; ?></p></div>		
+      							
+        </div>
+        <?php } ?>
     
-    <div class="newsone">
-    <div class="fusion-date-box">
-    <span class="news-date">5</span>
-    <span class="news-month-year">30-05-2017</span> </div>
-   
-    
-	<div class="recent-posts-content">
-		<h4 class="entry-title"><a href="#">Nature Club Trip</a></h4>
-        <p>A visit to the butterfly garden, OWALEKAR WADI, was conducted by the....</p></div>		
-							
-    </div>
-    
-    
-        <div class="newsone">
-    <div class="fusion-date-box">
-    <span class="news-date">5</span>
-    <span class="news-month-year">30-05-2017</span> </div>
-   
-    
-	<div class="recent-posts-content">
-		<h4 class="entry-title"><a href="#">Nature Club Trip</a></h4>
-        <p>A visit to the butterfly garden, OWALEKAR WADI, was conducted by the....</p></div>		
-							
-    </div>
+  
     
     </div>
     
